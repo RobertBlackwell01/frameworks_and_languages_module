@@ -2,13 +2,10 @@ const express = require('express')
 const app = express()
 const port = 8000
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { // https://expressjs.com/en/starter/hello-world.html
   res.send('Hello World!')
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(` listening on port ${port}`)
 })
-
-  // Docker container exit handler - https://github.com/nodejs/node/issues/4182
-  process.on('SIGINT', function() {process.exit()})
