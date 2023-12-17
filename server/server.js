@@ -13,11 +13,12 @@ app.use(cors())
 // Routes ----------------------------------------------------------------------
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', {root: __dirname})
+  res.sendFile('client.html', {root: __dirname})
 })
-//app.get('/vue.js', (req, res) => {
-//  res.sendFile('vue.js', {root: __dirname})
-//})
+
+app.get('/vue.js', (req, res) => {
+ res.sendFile('vue.js', {root: __dirname})
+})
 
 ITEMS = [
      {
