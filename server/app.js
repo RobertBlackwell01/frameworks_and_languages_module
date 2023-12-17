@@ -13,7 +13,7 @@ app.use(cors())
 // Routes ----------------------------------------------------------------------
 
 app.get('/', (req, res) => {
-  res.sendFile('client.html', {root: __dirname})
+  res.sendFile('index.html', {root: __dirname})
 })
 //app.get('/vue.js', (req, res) => {
 //  res.sendFile('vue.js', {root: __dirname})
@@ -28,7 +28,6 @@ ITEMS = [
         "lat": 1,
         "lon": 1,
         "date_from": "2021-11-22T08:22:39.067408",
-    
      }
 ]
 
