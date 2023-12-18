@@ -1,0 +1,5 @@
+FROM python:alpine
+WORKDIR /server/
+EXPOSE 8001
+COPY client.html .
+CMD ["python3", "-m", "http.server", "8001"]

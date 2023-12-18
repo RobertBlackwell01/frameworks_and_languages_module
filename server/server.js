@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/vue.js', (req, res) => {
- res.sendFile('vue.js', {root: __dirname})
+ res.sendFile('server.js', {root: __dirname})
 })
 
 ITEMS = [
@@ -32,12 +32,33 @@ ITEMS = [
      }
 ]
 
+let expectedFields = ['user_id', 'keywords', 'description', 'image', 'lat', 'lon'];
+
 app.post('/item/', (req, res) => {
-  if (Object.keys(req.body).sort().toString() != "id","user_id","keywords","description","lat","lon","date_from") {
-    return res.status(405).json({message: 'missing fields'})
+  const retrievedFields = Object.keys(req.body).toString().split(",");
+
+  // Check if 'image' field was included and adjust the expected fields accordingly
+  if (retrievedFields.includes('image')) {
+    expectedFields.push('image');
+  } else {
+    expectedFields = expectedFields.filter(field => field !== 'image');
   }
-  ITEMS.push(req.body)
-  res.status(201).json(req.body)
+
+  // Check if all expected fields are present and have non-empty values
+  const missingOrEmptyFields = expectedFields.filter(field => !retrievedFields.includes(field) || !req.body[field]);
+
+  if (missingOrEmptyFields.length > 0) {
+    console.log("POST 405 - Missing or Invalid Fields");
+    console.log(req.body);
+    return res.status(405).json({ "message": "Missing or invalid fields: " + missingOrEmptyFields.join(', ') });
+  }
+
+  ITEMS.push(req.body);
+  res.status(201).json(req.body);
+});
+
+app.get('/items/', (req, res) => {
+  res.status(200).json(ITEMS)
 })
 
 app.get('/items/', (req, res) => {
@@ -45,11 +66,20 @@ app.get('/items/', (req, res) => {
 })
 
 app.delete('/item/:id', (req, res) => {
-  const id = parseFloat(req.params.id)
-  ITEMS = ITEMS.filter((item)=>item.id != id)
-  res.status(204).json()
-  // TODO: implement 404?
-})
+  const id = parseFloat(req.params.id);
+
+  // Find the index of the item with the matching ID
+  const index = ITEMS.findIndex(item => item.id === id);
+
+  if (index !== -1) {
+    // Item found, proceed with deletion
+    ITEMS.splice(index, 1);
+    res.status(204).json();
+  } else {
+    // Item not found, send 404 response
+    res.status(404).json({ message: 'Item not found' });
+  }
+});
 
 
 // Serve -----------------------------------------------------------------------
@@ -57,20 +87,6 @@ app.delete('/item/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
-
-/*
-// https://expressjs.com/en/guide/error-handling.html
-function logErrors (err, req, res, next) {
-  console.error(err.stack)
-  next(err)
-}
-app.use(logErrors)
-app.use(function(req, res, next){
-  console.log('no route', req.originalUrl);
-  res.status(404).type('txt').send('Not found');
-  next()
-})
-*/
 
 // Docker container exit handler - https://github.com/nodejs/node/issues/4182
 process.on('SIGINT', function() {process.exit()})
