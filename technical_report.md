@@ -1,7 +1,7 @@
 Technical Report
 ================
 
-(intro describing purpose of report - 200ish words)
+(This is my introduction:)
 
 
 Critique of Server/Client prototype
