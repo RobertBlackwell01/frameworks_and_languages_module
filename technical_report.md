@@ -2,6 +2,8 @@ Technical Report
 ================
 
 (This is my introduction:)
+Introduction: This is my technical report, a continuation of assignment 1 for frameworks and languages. In this technical report, I intend to critique both server and client prototypes that have been provided by freecycle. 
+To do this I will take code snippets of each component and highlight key elements that I believe could be improved on and or written another way. During this process, I will explain why the pattern chosen is problematic covering multiple factors such as efficiency and ease of use.
 
 
 Critique of Server/Client prototype
