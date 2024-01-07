@@ -3,7 +3,7 @@ Technical Report
 Introduction: 
 
 This is my technical report, a continuation of assignment 1 for frameworks and languages. In this technical report, I intend to critique both server and client prototypes that have been provided by Freecycle. 
-To do this I will take code snippets of each component and highlight key elements that I believe could be improved on and or written another way. During this process, I will explain why the pattern chosen is problematic covering multiple factors such as efficiency and ease of use. After covering both Server and client prototypes using the structure below, I will cover the solution I have created using frameworks. I will cover 3 features for each framework elaborating on how I have used it and its effectiveness. And to finalise this report I will justify using the evidence  I have used in the report itself why frameworks are good and should be used in most cases.
+To do this I will take code snippets of each component and highlight key elements that I believe could be improved on and or written another way. During this process, I will explain why the pattern chosen is problematic covering multiple factors such as efficiency and ease of use. After covering both Server and client prototypes using the structure below, I will cover the solution I have created using frameworks. I will cover 3 features for each framework elaborating on how I have used it and its effectiveness. And to finalise this report I will justify using the evidence  I have used in the report itself and why frameworks are good and should be used in most cases.
 
 155 words
 
@@ -32,7 +32,17 @@ The Server and client prototypes were both written without the use of frameworks
 Server Framework Features
 -------------------------
 
-### (name of Feature 1)
+###1 (Routing)
+
+Routing in Express.js is the process of defining how an application responds to different requests from the client at different URLs (endpoints) with the use of specific HTTP methods including - get, post, and delete. It's a vital feature inside of Express that helps the application's backend logic by pre-determining and mapping the incoming requests to the appropriate handler functions. 
+
+(A code block snippet example demonstrating the feature)
+
+(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+(Provide reference urls to your sources of information about the feature - required)
+
+
+###2 (name of Feature 2)
 
 (Technical description of the feature - 40ish words)
 (A code block snippet example demonstrating the feature)
@@ -40,15 +50,7 @@ Server Framework Features
 (Provide reference urls to your sources of information about the feature - required)
 
 
-### (name of Feature 2)
-
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
-
-
-### (name of Feature 3)
+###3 (name of Feature 3)
 
 (Technical description of the feature - 40ish words)
 (A code block snippet example demonstrating the feature)
