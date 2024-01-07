@@ -32,29 +32,67 @@ The Server and client prototypes were both written without the use of frameworks
 Server Framework Features
 -------------------------
 
-###1 (Routing)
+**Routing**
 
 Routing in Express.js is the process of defining how an application responds to different requests from the client at different URLs (endpoints) with the use of specific HTTP methods including - get, post, and delete. It's a vital feature inside of Express that helps the application's backend logic by pre-determining and mapping the incoming requests to the appropriate handler functions. 
 
-(A code block snippet example demonstrating the feature)
+```JavaScript
+app.get('/', (req, res) => {
+  res.sendFile('client.html', {root: __dirname})
+})
+
+app.get('/vue.js', (req, res) => {
+ res.sendFile('server.js', {root: __dirname})
+})
+```
 
 (Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+
 (Provide reference urls to your sources of information about the feature - required)
 
 
-###2 (name of Feature 2)
+**Middleware**
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+Middleware is a series of functions the HTTPS request runs through before reaching the routes endpoint handler. each middleware function in the stack can perform different actions on the request and response objects such as termination of the cycle or passing on control to the next function in the stack.
+
+```JavaScript
+// CORS - https://expressjs.com/en/resources/middleware/cors.html
+const cors = require('cors')
+app.use(cors())
+```
+
+I've utilized the CORS middleware package to handle cross-origin resource sharing. Facilitates cross-origin requests, allowing express applications to accept requests from different organizations, domains, and ports.
+
 (Provide reference urls to your sources of information about the feature - required)
 
 
-###3 (name of Feature 3)
+**HTTP Responses and Handling Requests**
 
 (Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
+
+```JavaScript
+
+ if (missingOrEmptyFields.length > 0) {
+    console.log("POST 405 - Missing or Invalid Fields");
+    console.log(req.body);
+    return res.status(405).json({ "message": "Missing or invalid fields: " + missingOrEmptyFields.join(', ') });
+  }
+
+  ITEMS.push(req.body);
+  res.status(201).json(req.body);
+});
+
+app.get('/items/', (req, res) => {
+  res.status(200).json(ITEMS)
+})
+
+app.get('/items/', (req, res) => {
+  res.status(200).json(ITEMS)
+})
+```
+
 (Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+
 (Provide reference urls to your sources of information about the feature - required)
 
 
