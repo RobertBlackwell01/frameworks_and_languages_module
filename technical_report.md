@@ -46,9 +46,9 @@ app.get('/vue.js', (req, res) => {
 })
 ```
 
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+This code sets up a basic server using node.js and express.js to handle HTTP Get requests for two different routes. When a get request is made to the root URL the server responds by sending the client.html which is a landing page for any users trying to use the site.
 
-(Provide reference urls to your sources of information about the feature - required)
+https://expressjs.com/en/guide/routing.html
 
 
 **Middleware**
@@ -61,14 +61,14 @@ const cors = require('cors')
 app.use(cors())
 ```
 
-I've utilized the CORS middleware package to handle cross-origin resource sharing. Facilitates cross-origin requests, allowing express applications to accept requests from different organizations, domains, and ports.
+I've utilized the CORS middleware package to handle cross-origin resource sharing. Facilitates cross-origin requests, allowing express applications to accept requests from different organizations, domains, and ports. This is good as it allows the sharing of resources in a secure manner across multiple different platforms.
 
-(Provide reference urls to your sources of information about the feature - required)
+https://medium.com/@knoldus/a-guide-to-cors-in-node-js-with-express-78eaff58a84e
 
 
 **HTTP Responses and Handling Requests**
 
-(Technical description of the feature - 40ish words)
+(HTTP responses supply the status codes that communicate the status of the request such as 200 for success and 404 for not found alongside this the headers and body of the content is sent over to supply the browser with useful information that is used to build the site in the correct manner. 40ish words)
 
 ```JavaScript
 
@@ -85,10 +85,6 @@ I've utilized the CORS middleware package to handle cross-origin resource sharin
 app.get('/items/', (req, res) => {
   res.status(200).json(ITEMS)
 })
-
-app.get('/items/', (req, res) => {
-  res.status(200).json(ITEMS)
-})
 ```
 
 (Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
@@ -99,65 +95,170 @@ app.get('/items/', (req, res) => {
 Server Language Features
 -----------------------
 
-### (name of Feature 1)
+**Variable Declerations**
 
 (Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+
+```JavaScript
+let expectedFields = ['user_id', 'keywords', 'description', 'image', 'lat', 'lon'];
+const retrievedFields = Object.keys(req.body).toString().split(",");
+```
+
+(Declaring variables using const and let keywords - 40ish words)
+
 (Provide reference urls to your sources of information about the feature - required)
 
 
-### (name of Feature 2)
+**Functions**
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+(Using functions to define route handlers and middleware - 40ish words)
+
+```JavaScript
+app.post('/item/', (req, res) =>
+app.use(express.json());
+app.use(cors())
+```
+
+(Using functions to define route handlers and middleware - 40ish words)
+
 (Provide reference urls to your sources of information about the feature - required)
-
 
 
 Client Framework Features
 -------------------------
 
-### (name of Feature 1)
+**Data Binding**
+
+(Vue's data binding (data() function in the component) binds data properties like attendees and attendees to the HTML template, enabling two-way data binding. - 40ish words)
+
+```JavaScript
+const RootComponent = {
+          data() {
+            return {
+                attendee: {
+                    id: '',
+                    name: '',
+                    notes: '',
+                },
+                attendees: [],
+            }
+          }
+```
+(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+
+(Provide reference URLs to your sources of information about the feature - required)
+
+
+**Methods**
 
 (Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+
+```JavaScript
+methods: {
+            updateAttendees() {
+                fetch(`${urlAPI}/attendees`, {
+                })
+                    .then(response => response.json())
+                    .then(json => {this.attendees = json})
+                .catch(err => console.error(err))
+            },
+            clearInput() {
+                this.attendee = {...this.attendee, ...{
+                    id: Math.random(),
+                    name: undefined,
+                    notes: undefined,
+                }}
+            },
+            addAttendee() {
+                fetch(`${urlAPI}/attendee`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(this.attendee),
+                })
+                    .then(response => response.json())
+                    .then(()=>this.clearInput())
+                    .then(()=>this.updateAttendees())
+                .catch(err => console.error(err));
+            },
+            deleteAttendee(id) {
+                fetch(`${urlAPI}/attendee/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(()=>this.updateAttendees())
+                .catch(err => console.error(err));
+            }
+          },
+        }
+```
+
+(Vue methods (updateAttendees, clearInput, addAttendee, deleteAttendee) are defined within the component to perform specific actions like fetching data, adding new attendees, and deleting attendees - 40ish words)
+
 (Provide reference urls to your sources of information about the feature - required)
 
 
-### (name of Feature 2)
+**Lifecycle Hooks**
 
 (Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+
+```JavaScript
+
+ created() {
+            this.clearInput()
+            this.updateAttendees()
+          },
+
+```
+
+(Within the RootComponent, the created() hook is defined. Inside this hook, two methods are invoked: this.clearInput() and this.updateAttendees(). - 40ish words)
 
 
-### (name of Feature 3)
-
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
 (Provide reference urls to your sources of information about the feature - required)
 
 
 Client Language Features
 ------------------------
 
-### (name of Feature 1)
+**Form**
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+(HTML forms are essential for collecting user data and submitting it to the server or handling it within the client-side code, facilitating various interactions within web applications. - 40ish words)
+
+```HTML
+<form>
+    <!-- Input fields for user_id, lat, lon, image, keywords, and description -->
+    <input name="user_id" placeholder="user_id">
+    <input name="lat" placeholder="lat">
+    <input name="lon" placeholder="lon">
+    <input name="image" placeholder="image">
+    <input name="keywords" placeholder="keywords">
+    <textarea name="description" placeholder="description"></textarea>
+    <button data-action="create_item">Create Item</button>
+</form>
+```
+This <form> element is crucial for gathering user input. It encapsulates various input elements (such as text inputs and a textarea) along with a submit button (<button>). The form allows users to input data (like user_id, lat, lon, etc.) and submit it, which can trigger an action (like creating an item in your application). - 40ish words
+
 (Provide reference urls to your sources of information about the feature - required)
 
-### (name of Feature 2)
+**Object Literals**
 
 (Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+
+```JavaScript
+const RootComponent = {
+  data() {
+    return {
+        attendee: {
+            id: '',
+            name: '',
+            notes: '',
+        },
+        attendees: [],
+    }
+```
+
+
+(In the data() method of the Vue component (RootComponent), you're using object literals to define two objects: attendee and attendees. These objects have properties like id, name, and notes within the attendee object and an empty array within the attendees object. - 40ish words)
+
+
 (Provide reference urls to your sources of information about the feature - required)
 
 
@@ -166,4 +267,5 @@ Conclusions
 -----------
 
 (justify why frameworks are recommended - 120ish words)
+
 (justify which frameworks should be used and why 180ish words)
