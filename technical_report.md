@@ -68,7 +68,7 @@ https://medium.com/@knoldus/a-guide-to-cors-in-node-js-with-express-78eaff58a84e
 
 **HTTP Responses and Handling Requests**
 
-(HTTP responses supply the status codes that communicate the status of the request such as 200 for success and 404 for not found alongside this the headers and body of the content is sent over to supply the browser with useful information that is used to build the site in the correct manner. 40ish words)
+HTTP responses supply the status codes that communicate the status of the request such as 200 for success and 404 for not found alongside this the headers and body of the content is sent over to supply the browser with useful information that is used to build the site accurately. 40ish words)
 
 ```JavaScript
 
@@ -256,7 +256,7 @@ const RootComponent = {
 ```
 
 
-(In the data() method of the Vue component (RootComponent), you're using object literals to define two objects: attendee and attendees. These objects have properties like id, name, and notes within the attendee object and an empty array within the attendees object. - 40ish words)
+(In the data() method of the Vue component (RootComponent), using object literals to define two objects: attendee and attendees. These objects have properties like id, name, and notes within the attendee object and an empty array within the attendees object. - 40ish words)
 
 
 (Provide reference urls to your sources of information about the feature - required)
@@ -266,6 +266,6 @@ const RootComponent = {
 Conclusions
 -----------
 
-(justify why frameworks are recommended - 120ish words)
+I recommend frameworks as they streamline the developments by making little tasks very easy rather than writing multiple lines of code for one function already built into the framework. Also, frameworks provide more security as they come with more security features for the user to implement. Using frameworks also allows the user to make use of the pre-build templates that most frameworks offer. This streamlines development even more so as multiple features are all already written for the user. Using these templates also means that the code is written in the most efficient way ensuring the implementation has the most usability and scalability. 
 
 (justify which frameworks should be used and why 180ish words)
