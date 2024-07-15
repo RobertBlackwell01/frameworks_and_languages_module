@@ -13,9 +13,37 @@ Critique of Server/Client prototype
 
 The Server and client prototypes were both written without the use of frameworks. This isn't good because the amount of code needed to write minor elements of design and development is much higher than the need with server frameworks. I will now critique the prototype providing explanations as to why the code snippets have issues.
 
-### (name of Issue 1)
+### Parse_Request
 
-(A code snippet example demonstrating the issue)
+```python
+def parse_request(data):
+    r"""
+    >>> parse_request(b'GET /?key1=value1&key2=value2 HTTP/1.1\r\nHost: localhost:8000\r\nUser-Agent: curl/7.68.0\r\nAccept: */*\r\n\r\n')
+    {'method': 'GET', 'path': '/', 'version': '1.1', 'query': {'key1': 'value1', 'key2': 'value2'}, 'host': 'localhost:8000', 'user-agent': 'curl/7.68.0', 'accept': '*/*', 'body': ''}
+    >>> parse_request(b'Not a http request')
+    Traceback (most recent call last):
+    app.http_server.InvalidHTTPRequest: Not a http request
+    """
+    data = data.decode('utf8')
+    match_header = RE_HTTP_HEADER.search(data)
+    if not match_header:
+        log.error(data)
+        raise InvalidHTTPRequest(data)
+    request = match_header.groupdict()
+    request['query'] = {}
+    path_query = request['path'].split('?', maxsplit=1)
+    if (len(path_query) == 2):
+        request['path'], request['query'] = path_query
+        request['query'] = {k: '|'.join(v) for k,v in urllib.parse.parse_qs(request['query']).items()}
+    for header in RE_HTTP_HEADER_KEY_VALUE.finditer(data):
+        key, value = header.groupdict().values()
+        request[key.lower()] = value
+    request.update(RE_HTTP_BODY.search(data).groupdict())
+    log.debug(request)
+    return request
+
+```
+
 (Explain why this pattern is problematic - 40ish words)
 
 ### (name of Issue 2)
