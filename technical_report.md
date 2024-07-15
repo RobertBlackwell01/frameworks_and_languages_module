@@ -13,7 +13,7 @@ Critique of Server/Client prototype
 
 The Server and client prototypes were both written without the use of frameworks. This isn't good because the amount of code needed to write minor elements of design and development is much higher than the need with server frameworks. I will now critique the prototype providing explanations as to why the code snippets have issues.
 
-### Parse_Request
+### Parse Request
 
 ```python
 def parse_request(data):
@@ -45,14 +45,41 @@ def parse_request(data):
 ```
 Relying on the rigid regex pattern for HTTP parsing is problematic because it assumes requests are always exactly as they should be and follow the correct formats. This leads to issues with incorrect requests, nonstandard methods, and varying HTTPS versions. Which causes unreliable parsing and errors.
 
-### (name of Issue 2)
+### encode response
 
-(A code snippet example demonstrating the issue)
-(Explain why this pattern is problematic - 40ish words)
+```python
+
+def encode_response(response):
+    r"""
+    >>> encode_response({'body': '<html></html>'})
+    b'HTTP/1.0 200 OK\r\nContent-type: text/html; charset=utf-8\r\nServer: CustomHTTP/0.0 Python/3.9.0+\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: 13\r\n\r\n<html></html>'
+    """
+    response = {**RESPONSE_DEFAULTS, **response}
+    log.debug(response)
+    code = response.pop('code')
+    head = f"HTTP/1.0 {code} {RESPONSE_CODES[code]}".encode('utf8')
+    body = response.pop('body')
+    if isinstance(body, str):
+        body = body.encode('utf8')
+    response['Content-Length'] = len(body)
+    return RESPONSE_SEPARATOR.join((
+        head,
+        RESPONSE_SEPARATOR.join(
+            f'{k}: {v}'.encode('utf8')
+            for k, v in response.items()
+        ),
+        b'',
+        body,
+    ))
+```
+
+This is an issue as hardcoding the HTTP version limits its compatibility. With the incorrect response code the chances of errors are more apparent but assuming the correct UTF-8 encoding for the content length can be handled incorrectly which would lead to parsing failures and incorrect error codes displayed.
 
 ### Recommendation
-(why the existing implementation should not be used - 40ish words)
-(suggested direction - frameworks 40ish words)
+
+This implementation should not be used outside of this environment due to many reasons. Firstly the security risks. There will be security issues with improper handling of the user inputs which exposes them to potential attacks. The implementation does also not fully implement various aspects of the HTTP protocol such as chunked transfer encoding or different versions of HTTP. There is also a lack of error handling which would lead to more issues debugging but also maintaining the prototype. The example also does not manage partial incorrect requests effectively which will make the prototype perform incorrectly. Due to this, the server will have issues handling large requests due to the way it has been built which will also affect the performance and scalability.
+
+Django would be the best option for handling HTTP requests as it provides extensive built-in functions as well as robust security features, great request processing, and more scalability options. Django would also reduce the development time as its fairly straight forward in comparison to custom implementations like the prototype.
 
 
 Server Framework Features
