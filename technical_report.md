@@ -44,7 +44,7 @@ def parse_request(data):
 
 ```
 
-(Explain why this pattern is problematic - 40ish words)
+This is a problem as relying on the rigid regex pattern for HTTP parsing is problematic because it assumes requests are always exactly as they should be and follow the correct formats. This leads to issues with incorrect requests, nonstandard methods, and varying HTTPS versions. Which causes unreliable parsing and errors.
 
 ### (name of Issue 2)
 
