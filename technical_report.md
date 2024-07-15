@@ -3,7 +3,7 @@ Technical Report
 Introduction: 
 
 This is my technical report, a continuation of assignment 1 for frameworks and languages. In this technical report, I intend to critique both server and client prototypes that have been provided by Freecycle. 
-To do this I will take code snippets of each component and highlight key elements that I believe could be improved on and or written another way. During this process, I will explain why the pattern chosen is problematic covering multiple factors such as efficiency and ease of use. After covering both Server and client prototypes using the structure below, I will cover the solution I have created using frameworks. I will cover 3 features for each framework elaborating on how I have used it and its effectiveness. And to finalise this report I will justify using the evidence  I have used in the report itself and why frameworks are good and should be used in most cases.
+To do this I will take code snippets of each component and highlight key elements that I believe could be improved on and or written another way. During this process, I will explain why the pattern chosen is problematic covering multiple factors such as efficiency and ease of use. After covering both Server and client prototypes using the structure below, I will cover the solution I have created using frameworks. I will cover 3 features for each framework elaborating on how I have used it and its effectiveness. And to finalise this report I will justify using the evidence I have used in the report itself and why frameworks are good and should be used in most cases.
 
 155 words
 
@@ -35,7 +35,7 @@ Server Framework Features
 
 **Routing**
 
-Routing in Express.js is the process of defining how an application responds to different requests from the client at different URLs (endpoints) with the use of specific HTTP methods including - get, post, and delete. It's a vital feature inside of Express that helps the application's backend logic by pre-determining and mapping the incoming requests to the appropriate handler functions. 
+Routing in Express.js and node.js is the process of defining how an application responds to different requests from the client at different URLs (endpoints) with the use of specific HTTP methods including - get, post, and delete. It's a vital feature inside of Express that helps the application's backend logic by pre-determining and mapping the incoming requests to the appropriate handler functions.
 
 ```JavaScript
 app.get('/', (req, res) => {
@@ -47,56 +47,42 @@ app.get('/vue.js', (req, res) => {
 })
 ```
 
-This code sets up a basic server using node.js and express.js to handle HTTP Get requests for two different routes. When a get request is made to the root URL the server responds by sending the client.html which is a landing page for any users trying to use the site.
+This feature firstly addresses and serves the need for basic web setup for client-side applications. It solves the problem of delivering a HTML landing page so that users can visually see a webpage when they visit the site. By utilizing node and express, it efferently can handle the HTTP GET requests which ensures that the end users get the desired resources that they require. As the setup is quick using this feature allows developers to great a visual webpage fast which creates a clear separation between the server and client-side resources. 
 
 https://expressjs.com/en/guide/routing.html
 
 
 **Middleware**
+Middleware is a series of functions the HTTPS request runs through before reaching the routes endpoint handler. each middleware function in the stack can perform different actions on the request and response objects such as termination of the cycle or passing on control to the next function in the stack. 
 
-Middleware is a series of functions the HTTPS request runs through before reaching the routes endpoint handler. each middleware function in the stack can perform different actions on the request and response objects such as termination of the cycle or passing on control to the next function in the stack.
-
-```JavaScript
+```JavaScript 
 // CORS - https://expressjs.com/en/resources/middleware/cors.html
-const cors = require('cors')
-app.use(cors())
-```
-
-I've utilized the CORS middleware package to handle cross-origin resource sharing. Facilitates cross-origin requests, allowing express applications to accept requests from different organizations, domains, and ports. This is good as it allows the sharing of resources in a secure manner across multiple different platforms.
-
-https://medium.com/@knoldus/a-guide-to-cors-in-node-js-with-express-78eaff58a84e
-
-
+ const cors = require('cors') 
+app.use(cors()) ```
+I’ve utilized the CORS middleware package to handle all the cross-origin resource sharing. This allows for my express application to accept requests from different domains, ports and much more. By enabling CORS, I can securely share resources across various platforms which makes my application more flexible and accessible for users from different devices and sources.
+https://medium.com/@knoldus/a-guide-to-cors-in-node-js-with-express78eaff58a84e
 **HTTP Responses and Handling Requests**
-
-HTTP responses supply the status codes that communicate the status of the request such as 200 for success and 404 for not found alongside this the headers and body of the content are sent over to supply the browser with useful information that is used to build the site accurately. 
-
+HTTP responses supply the status codes that communicate the status of the request such as 200 for success and 404 for not found alongside this the headers and body of the content are sent over to supply the browser with useful information that is used to build the site accurately.
 ```JavaScript
-
- if (missingOrEmptyFields.length > 0) {
-    console.log("POST 405 - Missing or Invalid Fields");
-    console.log(req.body);
-    return res.status(405).json({ "message": "Missing or invalid fields: " + missingOrEmptyFields.join(', ') });
-  }
-
-  ITEMS.push(req.body);
-  res.status(201).json(req.body);
+if (missingOrEmptyFields.length > 0) {
+console.log("POST 405 - Missing or Invalid Fields");
+console.log(req.body);
+return res.status(405).json({ "message": "Missing or invalid fields:
+" + missingOrEmptyFields.join(', ') });
+}
+ITEMS.push(req.body);
+res.status(201).json(req.body);
 });
-
 app.get('/items/', (req, res) => {
-  res.status(200).json(ITEMS)
-})
+res.status(200).json(ITEMS)
+}) 
 ```
-
-As you can see from the code snippet the framework feature is handling post request first. Validation is the first section as the application wants to ensure there are no empty fields in the input data and would send the appropriate 405 if so. It also does the same for the items. However, there is a lack of error handling besides this which may cause problems when trying to update the items.
-
-https://medium.com/@vitaliykorzenkoua/handling-requests-and-responses-in-node-js-36ed725f6944
-
+This feature addresses the problem of ensuring data integrity and validation when handling POST requests in my web application. Checking for missing and or empty fields in the inputted data is ensures that only valid and complete data is accepted and processed. Then in turn, if any data is missing or invalid my application responds with a 405 status and error message which prevents the invalid data from being added to the items array. The problem of invalid data being added to my array is solved by using this.
+https://medium.com/@vitaliykorzenkoua/handling-requests-and-responses-innode-js-36ed725f6944
 
 Server Language Features
 -----------------------
-
-**Variable Declerations**
+**Variable Declarations**
 
 Fundamental for storing data values using the keywords var, let, and const to initialize the variable. Var is used for declaring. Variables can store different data types including numbers, strings and more using dynamic typing which means the variables can hold different types of data over time.
 
@@ -104,7 +90,6 @@ Fundamental for storing data values using the keywords var, let, and const to in
 let expectedFields = ['user_id', 'keywords', 'description', 'image', 'lat', 'lon'];
 const retrievedFields = Object.keys(req.body).toString().split(",");
 ```
-
 Declaring the retrieved fields as a const is beneficial as it ensures that the retrieved fields are always going to be the correct ones as the variable declaration of const prevents reassignment.
 
 https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/
@@ -120,7 +105,7 @@ app.use(express.json());
 app.use(cors())
 ```
 
-By defining the route handlers it allows me to ensure specific actions when receiving the post request. I also have told the application to use middleware which is critical for handling the data across multiple different applications which in this instance for the server and client side is crucial.
+I've utalized javas first class function to define route handlers and middleware for my express.js server. Middleware functions like the ones in my example are passed as paramentrs which enables json parsing and cors support. By using this feature of java script I have ensure that the code remains modular which allos for more efficent data handling which enhances matainability and scalability.
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
 
@@ -145,7 +130,7 @@ const RootComponent = {
             }
           }
 ```
-This defines initial empty states for the items object and also the array of items. This ensures that the starting point is predictable which helps to manage item data in the components this also ensures that the values are not random and or undefined.
+The problem of managing predictable and con
 
 https://v1.vuejs.org/guide/syntax.html
 
