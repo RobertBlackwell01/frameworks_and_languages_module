@@ -105,7 +105,7 @@ app.use(express.json());
 app.use(cors())
 ```
 
-I've utalized javas first class function to define route handlers and middleware for my express.js server. Middleware functions like the ones in my example are passed as paramentrs which enables json parsing and cors support. By using this feature of java script I have ensure that the code remains modular which allos for more efficent data handling which enhances matainability and scalability.
+I've utilized javas first class function to define route handlers and middleware for my express.js server. Middleware functions like the ones in my example are passed as paraments which enables Json parsing and CORS support. By using this feature of java script, I have ensure that the code remains modular which allows for more efficient data handling which enhances attainability and scalability.
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
 
@@ -115,10 +115,10 @@ Client Framework Features
 
 **Data Binding**
 
-I've used vue data bidning which excels in seamless data transfer between the model which in this case is data and the UI. As two-way binding ensures that when the data is changed on one side it's automatically updated on either side.
+I've used Vue data binding which excels in seamless data transfer between the model which in this case is data and the UI. As two-way binding ensures that when the data is changed on one side it's automatically updated on either side.
 
 ```JavaScript
-const RootComponent = {
+const Root Component = {
           data() {
             return {
                 items: {
@@ -130,14 +130,12 @@ const RootComponent = {
             }
           }
 ```
-The problem of managing predictable and con
-
+The problem of managing predictable and consistent initial states for data within this vue.js part. By defining the initial empty states for the items object and items array it ensures that the component starts with a known and controlled state. This prevents issues with undefined and or random values which can lead to errors. Having a pre-defined initial state helps ion manging item data more efficiently throughout the entire application.
 https://v1.vuejs.org/guide/syntax.html
 
+**Actions**
 
-**Methods**
-
-Methods are functions defined within the components to handle events. Methods can manipulate data and trigger UI updates alongside data binding.
+Actions are functions defined within the components to handle events. Methods can manipulate data and trigger UI updates alongside data binding.
 
 ```JavaScript
 methods: {
@@ -155,26 +153,6 @@ methods: {
                     notes: undefined,
                 }}
             },
-            additem() {
-                fetch(`${urlAPI}/items`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(this.item),
-                })
-                    .then(response => response.json())
-                    .then(()=>this.clearInput())
-                    .then(()=>this.updateItems())
-                .catch(err => console.error(err));
-            },
-            deleteitem(id) {
-                fetch(`${urlAPI}/items/${id}`, {
-                    method: 'DELETE',
-                })
-                    .then(()=>this.items())
-                .catch(err => console.error(err));
-            }
-          },
-        }
 ```
 
 I've defined the methods  within the component to perform specific actions like fetching data, adding new items, and deleting items. This is crucial as the client tests ensure  I have a working client side which allows me to add and remove items from the list.
@@ -226,7 +204,7 @@ https://www.w3schools.com/html/html_forms.asp
 
 **Object Literals**
 
-(Technical description of the feature - 40ish words)
+In JavaScript Object literals are a syntax used for defining objects with a set of keys – value pairs. Object literals allow for structured initialization of data, capturing all related properties and methods. This allows for predictable state management.
 
 ```JavaScript
 const RootComponent = {
@@ -240,8 +218,6 @@ const RootComponent = {
         attendees: [],
     }
 ```
-
-
 In the data() method of the Vue component (RootComponent), I've used  object literals to define two objects: attendee and attendees. These objects have properties like id, name, and notes within the attendee object and an empty array within the attendees object. 
 
 
