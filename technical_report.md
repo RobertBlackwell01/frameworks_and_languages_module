@@ -182,25 +182,9 @@ https://vuejs.org/guide/essentials/lifecycle
 Client Language Features
 ------------------------
 
-**Form**
+**NEED 1 MORE**
 
-HTML forms are essential for collecting user data and submitting it to the server or handling it within the client-side code, facilitating various interactions within web applications. Forms can also be used to collectively collect a sample of data which can be used as a sting to prepare an entire input form a user to send to the backend. Forms also have built-in validation to ensure the correct information is inputted.
 
-```HTML
-<form>
-    <!-- Input fields for user_id, lat, lon, image, keywords, and description -->
-    <input name="user_id" placeholder="user_id">
-    <input name="lat" placeholder="lat">
-    <input name="lon" placeholder="lon">
-    <input name="image" placeholder="image">
-    <input name="keywords" placeholder="keywords">
-    <textarea name="description" placeholder="description"></textarea>
-    <button data-action="create_item">Create Item</button>
-</form>
-```
-This element is crucial for gathering user input. It encapsulates various input elements as seen in the code preview along with a submit button. The form allows users to input data  and submit it, which can trigger an action that then communicates with the backend to create and item inside of my application.
-
-https://www.w3schools.com/html/html_forms.asp
 
 **Object Literals**
 
