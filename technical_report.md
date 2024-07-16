@@ -2,8 +2,8 @@ Technical Report
 ================
 Introduction: 
 
-This is my technical report, a continuation of assignment 1 for frameworks and languages. In this technical report, I intend to critique both server and client prototypes that have been provided by Freecycle. 
-To do this I will take code snippets of each component and highlight key elements that I believe could be improved on and or written another way. During this process, I will explain why the pattern chosen is problematic covering multiple factors such as efficiency and ease of use. After covering both Server and client prototypes using the structure below, I will cover the solution I have created using frameworks. I will cover 3 features for each framework elaborating on how I have used it and its effectiveness. And to finalize this report I will justify using the evidence I have used in the report itself and why frameworks are good and should be used in most cases.
+This is my technical report, a continuation of assignment 1 for frameworks and languages. In this technical report, I intend to critique both server and client prototypes that Freecycle has provided. 
+To do this I will take code snippets of each component and highlight key elements that I believe could be improved on or written another way. During this process, I will explain why the pattern chosen is problematic covering multiple factors such as efficiency and ease of use. After covering Server and client prototypes using the structure below, I will cover the solution I created using frameworks. I will cover 3 features for each framework elaborating on how I have used it and its effectiveness. And to finalize this report I will justify using the evidence I have used in the report itself and why frameworks are good and should be used in most cases.
 
 
 Critique of Server/Client prototype
@@ -79,7 +79,7 @@ This is an issue as hardcoding the HTTP version limits its compatibility. With t
 
 This implementation should not be used outside of this environment due to many reasons. Firstly the security risks. There will be security issues with improper handling of the user inputs which exposes them to potential attacks. The implementation does also not fully implement various aspects of the HTTP protocol such as chunked transfer encoding or different versions of HTTP. There is also a lack of error handling which would lead to more issues debugging but also maintaining the prototype. The example also does not manage partial incorrect requests effectively which will make the prototype perform incorrectly. Due to this, the server will have issues handling large requests due to the way it has been built which will also affect the performance and scalability.
 
-Django would be the best option for handling HTTP requests as it provides extensive built-in functions as well as robust security features, great request processing, and more scalability options. Django would also reduce the development time as its fairly straight forward in comparison to custom implementations like the prototype.
+Django would be the best option for handling HTTP requests as it provides extensive built-in functions as well as robust security features, great request processing, and more scalability options. Django would also reduce the development time as it's fairly straightforward in comparison to custom implementations like the prototype.
 
 
 Server Framework Features
@@ -234,7 +234,22 @@ https://vuejs.org/guide/essentials/lifecycle
 Client Language Features
 ------------------------
 
-**NEED 1 MORE**
+**Arrow Functions**
+
+In JavaScript arrow functions make it easier to write functions by using less code. They also solve problems when it comes to the "this" keyword function which can be found in traditional functions. Arrow functions are great for callbacks and working with array methods.
+
+```JavaScript
+
+ updateAttendees() {
+                fetch(`${urlAPI}/attendees`, {
+                })
+                    .then(response => response.json())
+                    .then(json => {this.attendees = json})
+                .catch(err => console.error(err))
+            },
+```
+In this example, I've used arrow functions to maintain the correct context from the Vue instance and ensure that the "this.attendees" are updated correctly. The use of arrow functions also helps maintain the readability of the code and avoids common issues.
+
 
 
 
